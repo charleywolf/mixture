@@ -24,9 +24,9 @@ export async function POST(req: Request) {
       model: openai("gpt-4-turbo"),
     });
 
-    const gpt3_5Turbo_result = await generateText({
+    const claude3Sonnet_response = await generateText({
       messages,
-      model: openai("gpt-3.5-turbo"),
+      model: anthropic("claude-3-5-sonnet-20240620"),
     });
 
     const claude3Opus_result = generateText({
@@ -37,11 +37,11 @@ export async function POST(req: Request) {
     const results = await Promise.all([
       gpt4o_result,
       gpt4Turbo_result,
-      gpt3_5Turbo_result,
+      claude3Sonnet_response,
       claude3Opus_result,
     ]);
 
-    const combination = `Combine the following messages based on these percentages:\n\n${parsedMixture.gpt4o} of gpt4o: ${results[0]?.text}\n${parsedMixture.gpt4Turbo} of gpt4Turbo: ${results[1]?.text}\n${parsedMixture.gpt3_5Turbo} of gpt3.5turbo: ${results[2]?.text}\n${parsedMixture.claude3Opus} of claude3Opus: ${results[3]?.text}`;
+    const combination = `Combine the following messages based on these percentages:\n\n${parsedMixture.gpt4o} of gpt4o: ${results[0]?.text}\n${parsedMixture.gpt4Turbo} of gpt4Turbo: ${results[1]?.text}\n${parsedMixture.claude3Sonnet} of claude3Sonnet: ${results[2]?.text}\n${parsedMixture.claude3Opus} of claude3Opus: ${results[3]?.text}`;
 
     return (
       await streamText({

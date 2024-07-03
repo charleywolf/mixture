@@ -2,7 +2,7 @@
 
 import { Loader, SendIcon } from "lucide-react";
 import { MixtureStorage, getLocalStorage } from "@/lib/hooks/settings";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import ChatMessage from "@/components/ChatMessage";
 import { ChatWithMessages } from "@/lib/utils";
@@ -12,6 +12,9 @@ import { useChat } from "ai/react";
 
 export default function ClientChats({ chat }: { chat: ChatWithMessages }) {
   const [storage, setStorage] = useState<MixtureStorage | null>(null);
+
+  const errorRef = useRef<HTMLDivElement>(null);
+
   const {
     messages,
     input,
@@ -29,6 +32,12 @@ export default function ClientChats({ chat }: { chat: ChatWithMessages }) {
     setStorage(data);
     setMessages(chat.messages);
   }, [chat.messages, setMessages]);
+
+  useEffect(() => {
+    if (errorRef.current) {
+      errorRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [isLoading]);
 
   return (
     <div className="overflow-y-scroll relative h-screen-without-header flex flex-col">
@@ -48,7 +57,7 @@ export default function ClientChats({ chat }: { chat: ChatWithMessages }) {
                 role={message.role === "user" ? "user" : "assistant"}
               />
             ))}
-        <span className="text-sm text-red-500 text-right">
+        <span ref={errorRef} className="text-sm text-red-500 text-right">
           {error?.message && "Error! Your mixture may not be configured."}
         </span>
       </main>
@@ -85,7 +94,6 @@ export default function ClientChats({ chat }: { chat: ChatWithMessages }) {
           )}
         </button>
       </form>
-      <div className=""></div>
     </div>
   );
 }
