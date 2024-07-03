@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 export type MixtureStorage = {
   gpt4o: string | null;
   gpt4Turbo: string | null;
-  gpt3_5Turbo: string | null;
+  claude3Sonnet: string | null;
   claude3Opus: string | null;
 };
 
@@ -13,7 +13,7 @@ export function getLocalStorage(): MixtureStorage {
   return {
     gpt4o: localStorage.getItem("gpt4o"),
     gpt4Turbo: localStorage.getItem("gpt4Turbo"),
-    gpt3_5Turbo: localStorage.getItem("gpt3_5Turbo"),
+    claude3Sonnet: localStorage.getItem("claude3Sonnet"),
     claude3Opus: localStorage.getItem("claude3Opus"),
   };
 }
@@ -21,7 +21,7 @@ export function getLocalStorage(): MixtureStorage {
 export function useMixtureSettings() {
   const [gpt4o, setGpt4o] = useState<number[]>([0]);
   const [gpt4Turbo, setGpt4Turbo] = useState<number[]>([0]);
-  const [gpt3_5Turbo, setGpt3_5Turbo] = useState<number[]>([0]);
+  const [claude3Sonnet, setClaude3Sonnet] = useState<number[]>([0]);
   const [claude3Opus, setClaude3Opus] = useState<number[]>([0]);
 
   useEffect(() => {
@@ -29,14 +29,15 @@ export function useMixtureSettings() {
 
     storage.gpt4o && setGpt4o([parseInt(storage.gpt4o)]);
     storage.gpt4Turbo && setGpt4Turbo([parseInt(storage.gpt4Turbo)]);
-    storage.gpt3_5Turbo && setGpt3_5Turbo([parseInt(storage.gpt3_5Turbo)]);
+    storage.claude3Sonnet &&
+      setClaude3Sonnet([parseInt(storage.claude3Sonnet)]);
     storage.claude3Opus && setClaude3Opus([parseInt(storage.claude3Opus)]);
   }, []);
 
-  const maxGpt4o = 100 - (gpt4Turbo[0] + gpt3_5Turbo[0] + claude3Opus[0]);
-  const maxGpt4Turbo = 100 - (gpt4o[0] + gpt3_5Turbo[0] + claude3Opus[0]);
-  const maxGpt3_5Turbo = 100 - (gpt4o[0] + gpt4Turbo[0] + claude3Opus[0]);
-  const maxClaude3Opus = 100 - (gpt4o[0] + gpt4Turbo[0] + gpt3_5Turbo[0]);
+  const maxGpt4o = 100 - (gpt4Turbo[0] + claude3Sonnet[0] + claude3Opus[0]);
+  const maxGpt4Turbo = 100 - (gpt4o[0] + claude3Sonnet[0] + claude3Opus[0]);
+  const maxClaude3Sonnet = 100 - (gpt4o[0] + gpt4Turbo[0] + claude3Opus[0]);
+  const maxClaude3Opus = 100 - (gpt4o[0] + gpt4Turbo[0] + claude3Sonnet[0]);
 
   const saveToLocalStorage = () => {
     sliders.map((slider) => {
@@ -47,7 +48,7 @@ export function useMixtureSettings() {
 
   const handleValueChange = (
     newValue: number[],
-    model: "gpt4o" | "gpt4Turbo" | "gpt3_5Turbo" | "claude3Opus"
+    model: "gpt4o" | "gpt4Turbo" | "claude3Sonnet" | "claude3Opus"
   ) => {
     switch (model) {
       case "gpt4o":
@@ -60,9 +61,9 @@ export function useMixtureSettings() {
           setGpt4Turbo(newValue);
         }
         break;
-      case "gpt3_5Turbo":
-        if (newValue[0] <= maxGpt3_5Turbo) {
-          setGpt3_5Turbo(newValue);
+      case "claude3Sonnet":
+        if (newValue[0] <= maxClaude3Sonnet) {
+          setClaude3Sonnet(newValue);
         }
         break;
       case "claude3Opus":
@@ -87,10 +88,10 @@ export function useMixtureSettings() {
       onValueChange: (v: number[]) => handleValueChange(v, "gpt4Turbo"),
     },
     {
-      value: gpt3_5Turbo,
-      id: "gpt3_5Turbo",
-      name: "GPT-3.5 Turbo",
-      onValueChange: (v: number[]) => handleValueChange(v, "gpt3_5Turbo"),
+      value: claude3Sonnet,
+      id: "claude3Sonnet",
+      name: "Claude 3 Sonnet",
+      onValueChange: (v: number[]) => handleValueChange(v, "claude3Sonnet"),
     },
     {
       value: claude3Opus,
