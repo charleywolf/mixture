@@ -3,8 +3,11 @@
 This is an example of a mixture of agents, a web application which allows you to pick and choose different AI models and combine them into one, unique response.
 
 ## Examples
-![Mixture Settings Example on iPad Air](https://i.ibb.co/4NPtjvy/i-Pad-Air-Mixture-Settings.png)
-![Mixture Chat Example on iPad Air](https://i.ibb.co/pPBkyNh/i-Pad-Air-Chat-Examples.png)
+
+<div style="display: flex">
+  <img src="https://i.ibb.co/4NPtjvy/i-Pad-Air-Mixture-Settings.png" height="500" alt="Mixture Settings Example on iPad Air"/>&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://i.ibb.co/pPBkyNh/i-Pad-Air-Chat-Examples.png" height="500" alt="Mixture Chat Example on iPad Air"/>&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
 
 ## Features
 - Sleek and modern chat interface with automatic scrolling to the latest message, real-time status updates, and a visually appealing design.
