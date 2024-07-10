@@ -5,8 +5,8 @@ This is an example of a mixture of agents, a web application which allows you to
 ## Examples
 
 <div style="display: flex">
-  <img src="https://i.ibb.co/4NPtjvy/i-Pad-Air-Mixture-Settings.png" height="500" alt="Mixture Settings Example on iPad Air"/>&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://i.ibb.co/pPBkyNh/i-Pad-Air-Chat-Examples.png" height="500" alt="Mixture Chat Example on iPad Air"/>&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/charleywolf/mixture/assets/41237443/24a17791-6db6-451f-a9ca-3e98ae166e4f" height="600" alt="Mixture Settings Example on iPad Air"/>&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/charleywolf/mixture/assets/41237443/e7e7e6f0-d2cf-4bbf-a05d-e3af0ba7fbf3" height="600" alt="Mixture Chat Example on iPad Air"/>&nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 
 ## Features
